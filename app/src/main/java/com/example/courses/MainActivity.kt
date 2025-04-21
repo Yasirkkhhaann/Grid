@@ -46,8 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.courses.data.DataSource
-import com.example.courses.model.Topic
+
 import com.example.courses.ui.theme.CoursesTheme
 
 class MainActivity : ComponentActivity() {
@@ -56,95 +55,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CoursesTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .statusBarsPadding(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    TopicGrid(
-                        modifier = Modifier.padding(
-                            start = dimensionResource(R.dimen.padding_small),
-                            top = dimensionResource(R.dimen.padding_small),
-                            end = dimensionResource(R.dimen.padding_small),
-                        )
-                    )
-                }
+
             }
         }
     }
 }
 
 @Composable
-fun TopicGrid(modifier: Modifier = Modifier) {
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
-        modifier = modifier
-    ) {
-        items(DataSource.topics) { topic ->
-            TopicCard(topic)
-        }
-    }
+fun TopicGrid(){
 }
 
 @Composable
-fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
-    Card {
-        Row {
-            Box {
-                Image(
-                    painter = painterResource(id = topic.imageRes),
-                    contentDescription = null,
-                    modifier = modifier
-                        .size(width = 68.dp, height = 68.dp)
-                        .aspectRatio(1f),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Column {
-                Text(
-                    text = stringResource(id = topic.name),
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        bottom = dimensionResource(R.dimen.padding_small)
-                    )
-                )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_grain),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .padding(start = dimensionResource(R.dimen.padding_medium))
-                    )
-                    Text(
-                        text = topic.availableCourses.toString(),
-                        style = MaterialTheme.typography.labelMedium,
-                        modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_small))
-                    )
-                }
-            }
-        }
-    }
+fun TopicCard(){
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TopicPreview() {
-    CoursesTheme {
-        val topic = Topic(R.string.photography, 321, R.drawable.photography)
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            TopicCard(topic = topic)
-        }
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TopicPreview() {
+//    CoursesTheme {
+//        val topic = Topic(R.string.photography, 321, R.drawable.photography)
+//        Column(
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            TopicCard(topic = topic)
+//        }
+//    }
+//}
