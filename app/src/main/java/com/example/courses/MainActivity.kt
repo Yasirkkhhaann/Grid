@@ -63,23 +63,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TopicGrid(){
+
+
+    Column(modifier = Modifier.padding(20.dp)){
+
+        Text("Hello World")
+
+    }
 }
 
 @Composable
 fun TopicCard(){
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun TopicPreview() {
-//    CoursesTheme {
-//        val topic = Topic(R.string.photography, 321, R.drawable.photography)
-//        Column(
-//            modifier = Modifier.fillMaxSize(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            TopicCard(topic = topic)
-//        }
-//    }
-//}
+@Preview (showBackground = true)
+@Composable
+fun TopicGridPreview(){
+    TopicGrid()
+}
