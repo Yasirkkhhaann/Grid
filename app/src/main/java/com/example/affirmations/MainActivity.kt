@@ -19,6 +19,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridCells.Fixed
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,8 +47,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.affirmations.data.DataSource
 import com.example.affirmations.data.Topic
 import com.example.affirmations.ui.theme.AffirmationsTheme
+import androidx.compose.foundation.lazy.grid.items
+
 
 class MainActivity : ComponentActivity() {
 
@@ -51,20 +61,46 @@ class MainActivity : ComponentActivity() {
             AffirmationsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .fillMaxSize()
+                        .statusBarsPadding(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AffirmationsApp()
+                    GridCardList(
+
+                        modifier = Modifier.padding(
+                            start = dimensionResource(R.dimen.padding_small),
+                            top = dimensionResource(R.dimen.padding_small),
+                            end = dimensionResource(R.dimen.padding_small)
+                        )
+                    )
                 }
             }
         }
     }
 }
 
-@Composable
-fun AffirmationsApp() {
-}
 
+@Composable
+fun GridCardList(modifier: Modifier = Modifier) {
+
+    LazyVerticalGrid(
+        columns = Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+    ) {
+
+        items(DataSource.topics) {
+
+                topics ->
+
+            GridCard(topics)
+        }
+
+    }
+}
 
 
 @Composable
@@ -112,9 +148,8 @@ fun GridCard(topic: Topic, modifier: Modifier = Modifier) {
 }
 
 
-
 @Preview
 @Composable
-fun GridCardPerview(){
-    GridCard(Topic(R.string.architecture, 58, R.drawable.architecture))
+fun GridCardPerview() {
+    GridCardList()
 }
